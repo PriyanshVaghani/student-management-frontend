@@ -24,15 +24,14 @@ export default function Student() {
   };
 
   let saveStudent = (event) => {
-    event.prevenDefault();
+    event.preventDefault();
     axios
       .post("http://localhost:8080/student", student)
-      .then((response) => {
-        if (response.data != null) {
-          alert("Record added Successfuly!!!");
-        }
-      })
+      .then((response) => alert(response.data))
       .catch((error) => alert(error));
+    setId("");
+    setName("");
+    setAddress("");
   };
 
   return (
@@ -40,7 +39,9 @@ export default function Student() {
       <Container>
         <Card>
           <Form onSubmit={saveStudent}>
-            <Card.Header>Add Student Information</Card.Header>
+            <Card.Header>
+              <strong>Add Student Information</strong>
+            </Card.Header>
             <Card.Body>
               <Form.Group className="mb-3">
                 <Form.Label>Id</Form.Label>
